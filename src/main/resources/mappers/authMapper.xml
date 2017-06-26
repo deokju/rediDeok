@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AuthMapper">
+
+	<select id="getUserById" parameterType="string" resultType="AuthVO">
+		SELECT
+		 id, password, userName, profile, dbNum
+		FROM
+		  TB_MEMBER
+		WHERE
+		  id = #{id}
+	</select>
+
+
+	<select id="getMembers"  resultType="AuthVO">
+		SELECT
+		  id, password, userName, profile, dbNum
+		FROM
+		  TB_MEMBER
+	</select>
+
+	<select id="getInsertDbNum"  resultType="hashMap">
+	SELECT
+		count(dbNum) as cnt, dbNum
+		FROM
+		TB_MEMBER
+		group by dbNum
+		order by dbNum asc
+	limit 1
+	</select>
+
+    <insert id="insertMember" parameterType="AuthVO">
+        INSERT INTO TB_MEMBER
+        ( id, password, userName, profile, dbNum)
+        VALUES
+        (#{id}, #{password}, #{userName}, #{profile}, #{dbNum})
+    </insert>
+
+	<update id="insertMember2" statementType="CALLABLE" parameterType="AuthVO">
+        {  call INSERT_MEMBER(
+                #{id},
+                #{password},
+                #{userName},
+                #{profile}
+            )
+        }
+	</update>
+</mapper>
+
+

@@ -1,4 +1,4 @@
-package com.deok.web.controller;
+package com.deok.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
