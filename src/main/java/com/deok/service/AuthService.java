@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.List;
 
-@Service
+@Service(value = "authService")
 public class AuthService {
 
     @Inject
